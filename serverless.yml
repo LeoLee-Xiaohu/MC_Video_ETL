@@ -1,0 +1,108 @@
+service: ${env:APPLICATION}
+frameworkVersion: '3'
+
+useDotenv: true
+variablesResolutionMode: 20210326
+
+plugins:
+  - serverless-python-requirements
+  - serverless-dotenv-plugin
+  # - serverless-prune-plugin
+custom:
+  pythonRequirements:
+    dockerizePip: false
+  # prune:
+  #   automatic: true
+  #   number: 3
+  dotenv:
+    include:
+      - TZ_LOCAL
+  dynamoDbTable: data_pipeline_dynamodb_table
+  dynamoDbArn: !Join
+                  - ''
+                  - - 'arn:aws:dynamodb:'
+                    - !Ref 'AWS::Region'
+                    - ':'
+                    - !Ref 'AWS::AccountId'
+                    - ':table/'
+                    - ${self:custom.dynamoDbTable}
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 256
+  timeout: 300
+  deploymentBucket:
+  # config you deploymentBucket
+    name: serverless-leo-deployment
+    maxPreviousDeploymentArtifacts: 3
+  region: ${env:REGION}
+  # region: ap-southeast-2
+
+  versionFunctions: true
+
+# you can add statements to the Lambda function's IAM Role here 给各个服务对应权限
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:HeadObject
+        - s3:GetObject
+      #config your iam role for s3 permission
+      Resource:
+        - arn:aws:s3:::leo20220508-src/*
+    - Effect: Allow
+      Action: 
+        - dynamodb:*
+      Resource:
+        - ${self:custom.dynamoDbArn}
+    - Effect: Allow
+      Action:
+        - logs:*
+      Resource: "*"
+
+# you can define service wide environment variables here
+  environment:
+    DYNAMO_TABLE: ${self:custom.dynamoDbTable}
+
+# you can add packaging information here
+package:
+  exclude:
+    - __cache__/**
+    - __pycache__/**
+    - node_modules/**
+    - 'package.json'
+    - 'package-lock.json'
+
+# lambda function code
+functions:
+  dataPipeline:
+    handler: data_pipeline.run
+    name: my_first_data_pipeline
+    description: "jiang ren data pipeline demo"
+    #config what event will triggle lambda
+    events:
+      - s3:
+          bucket: leo20220508-src
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: csv/
+          existing: true
+
+# you can add CloudFormation resource templates here
+resources:
+  Description: Jang Ren data pipeline services defination
+  Resources:
+    pipelineDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.dynamoDbTable}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: date
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: date
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
