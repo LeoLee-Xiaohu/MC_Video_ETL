@@ -19,7 +19,7 @@ The building process was designed as the following figure 1. shown. With the hel
     
     After a raw data file (.CSV) was uploaded to the S3 storage bucket, a Lambda would be triggered automatically and produce a data profiling report. 
     
-    ![                                                         Figure 2. Data profiling report](MC_video_project%207820fa0b06cb43848f1b743c0c39b42e/Screen_Shot_2022-07-13_at_11.52.37_am.png)
+    ![Figure 2. Data profiling report]([MC_video_project%207820fa0b06cb43848f1b743c0c39b42e/Screen_Shot_2022-07-13_at_11.52.37_am.png](https://github.com/LeoLee-Xiaohu/MC_Video_ETL/blob/main/Images/data_profiling.png))
     
                                                              Figure 2. Data profiling report
     
@@ -39,7 +39,7 @@ Since the business is relatively a small business and the demand for analysing v
 
 The following figure 3. shows the star schema of the warehouse. 
 
-![                                                 Figure 3. the schema of MC video data warehouse](MC_video_project%207820fa0b06cb43848f1b743c0c39b42e/star_schema.png)
+![Figure 3. the schema of MC video data warehouse]([MC_video_project%207820fa0b06cb43848f1b743c0c39b42e/star_schema.png](https://github.com/LeoLee-Xiaohu/MC_Video_ETL/blob/main/Images/star_schema.png))
 
                                                  Figure 3. the schema of MC video data warehouse
 
