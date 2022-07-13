@@ -20,8 +20,7 @@ The building process was designed as the following figure 1. shown. With the hel
     After a raw data file (.CSV) was uploaded to the S3 storage bucket, a Lambda would be triggered automatically and produce a data profiling report. 
     
     ![Figure 2. Data profiling report](https://github.com/LeoLee-Xiaohu/MC_Video_ETL/blob/main/Images/data_profiling.png)
-    
-                                                             Figure 2. Data profiling report
+    | <b> Figure 2. Data profiling report </b>|
     
     Data profiling reports would be displayed daily on the website with the support of AWS EC2. The raw data could be monitored daily before the data are prepared to be processed. For example, if the volume of records decreased significantly, this would be notified to the data engineer by Amazon SNS.
     
@@ -40,8 +39,7 @@ Since the business is relatively a small business and the demand for analysing v
 The following figure 3. shows the star schema of the warehouse. 
 
 ![Figure 3. the schema of MC video data warehouse]([MC_video_project%207820fa0b06cb43848f1b743c0c39b42e/star_schema.png](https://github.com/LeoLee-Xiaohu/MC_Video_ETL/blob/main/Images/star_schema.png))
-
-                                                 Figure 3. the schema of MC video data warehouse
+| <b> Figure 3. the schema of MC video data warehouse </b> |
 
 1. **Data insight** 
 
