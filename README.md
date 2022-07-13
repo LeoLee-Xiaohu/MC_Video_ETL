@@ -15,19 +15,19 @@ The building process was designed as the following figure 1. shown. With the hel
 ### a. **Data Quality Control** 
 #### i.  **Data  Profiling** 
     
-    A data quality control was conducted priorly.
+A data quality control was conducted priorly.
     
-    After a raw data file (.CSV) was uploaded to the S3 storage bucket, a Lambda would be triggered automatically and produce a data profiling report. 
+After a raw data file (.CSV) was uploaded to the S3 storage bucket, a Lambda would be triggered automatically and produce a data profiling report. 
     
 |![Figure 2. Data profiling report](https://github.com/LeoLee-Xiaohu/MC_Video_ETL/blob/main/images/dataProfiling.png) |
 |:--:|
 | <b> Figure 2. Data profiling report </b>|
     
-    Data profiling reports would be displayed daily on the website with the support of AWS EC2. The raw data could be monitored daily before the data are prepared to be processed. For example, if the volume of records decreased significantly, this would be notified to the data engineer by Amazon SNS.
+Data profiling reports would be displayed daily on the website with the support of AWS EC2. The raw data could be monitored daily before the data are prepared to be processed. For example, if the volume of records decreased significantly, this would be notified to the data engineer by Amazon SNS.
     
 #### ii.  **Data Auditing** 
     
-    Once the data profiling report shows the raw data without problems, the raw data would be stored in the S3 landing bucket. With Amazon Athena, a data engineer could see and check the data immediately. 
+Once the data profiling report shows the raw data without problems, the raw data would be stored in the S3 landing bucket. With Amazon Athena, a data engineer could see and check the data immediately. 
     
 ### b. **Data transformation and loading** 
 
