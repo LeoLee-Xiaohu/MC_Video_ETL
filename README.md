@@ -1,10 +1,10 @@
 # MC_video_project
 
-1. **Introduction**
+## 1. **Introduction**
 
 This project is for building an ETL process and building a data warehouse for the product of measuring MC video performance. By using the clean secure and consistent data, the video performance could be measured and insightful data analysing reports could be provided successfully. 
 
-1. **ETL building**
+## 2. **ETL building**
 
 The building process was designed as the following figure 1. shown. With the help of Serverless Framework, the process could be auto deployed by Amazon Clouldformation. 
 
@@ -12,8 +12,8 @@ The building process was designed as the following figure 1. shown. With the hel
 |:--:|
 | <b> Figure 1. MC video ETL  process </b>|
 
-1. **Data Quality Control** 
-    1.  **Data  Profiling** 
+### a. **Data Quality Control** 
+#### i.  **Data  Profiling** 
     
     A data quality control was conducted priorly.
     
@@ -25,15 +25,15 @@ The building process was designed as the following figure 1. shown. With the hel
     
     Data profiling reports would be displayed daily on the website with the support of AWS EC2. The raw data could be monitored daily before the data are prepared to be processed. For example, if the volume of records decreased significantly, this would be notified to the data engineer by Amazon SNS.
     
-    ii.  **Data Auditing** 
+#### ii.  **Data Auditing** 
     
     Once the data profiling report shows the raw data without problems, the raw data would be stored in the S3 landing bucket. With Amazon Athena, a data engineer could see and check the data immediately. 
     
-2. **Data transformation and loading** 
+### b. **Data transformation and loading** 
 
 To balance the cost and efficiency, the data transformation and loading were processed together, which means ETL and ELT were working together. Considering the timeout of the lambda function is 15 minutes, the Snowflake was needed as the increasing volume and complexity of data in the future. Thus,  the Amazon Lambda and the Snowflake were deployed together to handle data transformation and loading.
 
-1. **Data warehousing (Kimball Model)**    
+## 3. **Data warehousing (Kimball Model)**    
 
 Since the business is relatively a small business and the demand for analysing video performance is urgent, the data warehouse was designed based on Kimball Model. 
 
@@ -43,7 +43,7 @@ The following figure 3. shows the star schema of the warehouse.
 |:--:|
 | <b> Figure 3. the schema of MC video data warehouse </b> |
 
-1. **Data insight** 
+## 4. **Data insight** 
 
 Data insight was conducted by Tableau. 
 
