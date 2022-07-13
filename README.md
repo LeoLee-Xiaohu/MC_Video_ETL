@@ -8,7 +8,7 @@ This project is for building an ETL process and building a data warehouse for th
 
 The building process was designed as the following figure 1. shown. With the help of Serverless Framework, the process could be auto deployed by Amazon Clouldformation. 
 
-![                                                               Figure 1. MC video ETL  process ](MC_video_project%207820fa0b06cb43848f1b743c0c39b42e/Screen_Shot_2022-07-13_at_12.10.44_pm.png)
+![                                                               Figure 1. MC video ETL  process ](https://github.com/LeoLee-Xiaohu/MC_Video_ETL/blob/main/Images/MC_video_ETL.png)
 
                                                                Figure 1. MC video ETL  process 
 
