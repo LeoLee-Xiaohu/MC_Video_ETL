@@ -136,11 +136,11 @@ copy into "MC_VIDEO"."PUBLIC".TIME from @STGTIME
   file_format = TIME;
   
 
-select * from TIME
-limit 10;
+-- select * from TIME
+-- limit 10;
 
-select * from staging
-limit 10;
+-- select * from staging
+-- limit 10;
 
 -- load fact from staging table to fact table
 insert into fact (timeid, titleid, siteid, platformid)
@@ -155,4 +155,4 @@ on e.site = e.site
 left join platform d 
 on e.platform = d.platform;
 
-select * from fact limit 10;
+-- select * from fact limit 10;
