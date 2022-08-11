@@ -15,7 +15,7 @@ The building process was designed as the following figure 1. shown. With the hel
 ### a. **Data Quality Control** 
 #### i.  **Data  Profiling** 
     
-A data quality control was conducted priorly.
+A data quality control was conducted priorly. The raw data has over 1 million records, including column Datatime, VideoTitle and Events. Sample data can be find in the folder "data". 
     
 After a raw data file (.CSV) was uploaded to the S3 storage bucket, a Lambda would be triggered automatically and produce a data profiling report. 
     
