@@ -1,3 +1,5 @@
+# using layer to import pandas, 
+# here is the arn list to find pandas package: https://api.klayers.cloud//api/v2/p3.9/layers/latest/ap-southeast-2/html
 import boto3
 import os 
 from urllib.parse import unquote_plus
