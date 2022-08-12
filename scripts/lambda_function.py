@@ -41,7 +41,7 @@ def data_process(file):
     def like_site(x):
         platform_set = {'Android','iPhone','iPad','Web'}
         titles = x.split('|')[0]
-        if any(title in platform_set for title in titles.split()): return None 
+        if any(title in platform_set for title in titles.split()): return 'None' 
         return titles 
 
     raw = pd.read_csv(file, quotechar= '"', escapechar='\\',error_bad_lines = False)
@@ -54,7 +54,7 @@ def data_process(file):
     processed.loc[:, 'DateTime'] = processed['DateTime'].apply(lambda x : x[:-8])
     dim_time = pd.DataFrame(processed['DateTime'].unique())
     dim_time.columns = ['DateTime']
-    dim_time.index.name = 'timeid'
+
 
     dim_time.loc[:,'year'] = dim_time['DateTime'].apply(lambda x : dt_obj(x).year)
     dim_time.loc[:, 'month'] = dim_time['DateTime'].apply(lambda x: dt_obj(x).month)
@@ -65,16 +65,19 @@ def data_process(file):
     processed.loc[:,'title'] = processed['VideoTitle'].apply(lambda x : x.split('|')[-1])
     dim_title = pd.DataFrame(processed['title'].unique())
     dim_title.columns = ['title']
+    dim_title.index += 1
     dim_title.index.name = 'titleid'
 
     processed.loc[:,'platform'] = processed['VideoTitle'].apply(lambda x : like_platform(x))
     dim_platform = pd.DataFrame(processed['platform'].unique())
     dim_platform.columns = ['platform']
+    dim_platform.index += 1
     dim_platform.index.name = 'platformid'
 
     processed.loc[:,'site'] = processed['VideoTitle'].apply(lambda x: like_site(x))
     dim_site = pd.DataFrame(processed['site'].unique())
     dim_site.columns = ['site']
+    dim_site.index += 1
     dim_site.index.name = 'siteid'
 
     processed.drop(columns = ['VideoTitle'], inplace =True)
@@ -84,7 +87,7 @@ def data_process(file):
     fact = processed 
     del processed 
 
-    dim_time.to_csv('/tmp/dim_time.csv', line_terminator= '\n', escapechar='\\')
+    dim_time.to_csv('/tmp/dim_time.csv', line_terminator= '\n', escapechar='\\',index=False)
     dim_site.to_csv('/tmp/dim_site.csv',line_terminator='\n',escapechar='\\')
     dim_title.to_csv('/tmp/dim_title.csv',line_terminator='\n',escapechar='\\')
     dim_platform.to_csv('/tmp/dim_platform.csv',line_terminator='\n',escapechar='\\')

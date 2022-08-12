@@ -1,7 +1,6 @@
 
 -- create tables
-CREATE TABLE IF NOT EXISTS time(
-	timeid int not null identity(0,1),
+CREATE or replace table time(
 	DateTime char(16),
 	year smallint,
 	month smallint,
@@ -13,7 +12,7 @@ CREATE TABLE IF NOT EXISTS title(
 	titleid int not null identity(0,1),
 	title varchar(200));
 
-CREATE TABLE IF NOT EXISTS site(
+CREATE or replace TABLE site(
 	siteid int not null identity(0,1),
 	site varchar(200));
 
@@ -24,15 +23,15 @@ CREATE TABLE IF NOT EXISTS platform(
 CREATE or replace table staging(
 	DateTime char(16) not null,
 	title varchar(200) not null,
-	site varchar(200) not null,
-	platform varchar(50) null);
+	platform varchar(200) not null,
+	site varchar(50) not null);
 
 
 CREATE or replace table fact(
-	timeid int not null,
+	datetime char(16) not null,
 	titleid int not null,
 	siteid int not null,
-	platformid int null);
+	platformid int not null);
     
     
 ---file format
@@ -135,24 +134,17 @@ copy into "MC_VIDEO"."PUBLIC".STAGING from @STAGING
 copy into "MC_VIDEO"."PUBLIC".TIME from @STGTIME
   file_format = TIME;
   
-
--- select * from TIME
--- limit 10;
-
--- select * from staging
--- limit 10;
-
 -- load fact from staging table to fact table
-insert into fact (timeid, titleid, siteid, platformid)
-select a.timeid, b.titleid, c.siteid, d.platformid
+insert into fact (datetime, titleid, siteid, platformid)
+select a.datetime, b.titleid, c.siteid, d.platformid
 from staging e
 left join time a 
 on e.DateTime = a.DateTime
 left join title b 
 on e.title = b.title
 left join site c 
-on e.site = e.site
+on e.site = c.site
 left join platform d 
 on e.platform = d.platform;
 
--- select * from fact limit 10;
+TRUNCATE staging;
