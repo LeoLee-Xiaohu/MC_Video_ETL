@@ -1,9 +1,16 @@
 Resources:
   S3Bucket:
     Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
     Properties:
-      # AccessControl: Private
       BucketName: MC-VIDEO-GA
+      
+# Resources:
+#   S3Bucket:
+#     Type: 'AWS::S3::Bucket'
+#     Properties:
+#       # AccessControl: Private
+#       BucketName: MC-VIDEO-GA
       # BucketEncryption:
       #   ServerSideEncryptionConfiguration:
       #     - ServerSideEncryptionByDefault:

@@ -26,4 +26,4 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
         with:
           name: s3-buckets-mcvideo
-          template: cfresource/s3.yml
+          template: cfn/s3.yml
